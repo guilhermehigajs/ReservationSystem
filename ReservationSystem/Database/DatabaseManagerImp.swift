@@ -19,29 +19,23 @@ class DatabaseManagerImp {
     }
     
     func validateCredentials(_ pin: String, completion: @escaping (Bool) -> Void) {
-        db.collection(Constant.Access.collectionName).document(Constant.Access.pinCode).getDocument { documentSnapshot, error in
-            if let error = error {
-                print("Error finding document: \(error.localizedDescription)")
-                completion(false)
-                return
-            }
-            guard let documentSnapshot = documentSnapshot else {
-                print("Document does not exist")
-                completion(false)
-                return
-            }
-            if let safedPin = documentSnapshot.data()?[Constant.Access.pinCode] as? String {
-                print(safedPin)
-                if safedPin == pin {
-                    completion(true)
-                } else {
-                    print("incorrect pin")
+        db.collection(Constant.Access.collectionName)
+            .whereField(Constant.Access.pinCode, isEqualTo: pin)
+            .getDocuments { snapshot, error in
+
+                if let error = error {
+                    print("Error getting documents: \(error.localizedDescription)")
                     completion(false)
+                    return
                 }
-            } else {
-                print("pin code not founded")
-                completion(false)
+
+                guard let documents = snapshot?.documents, !documents.isEmpty else {
+                    print("No matching documents found for pin: \(pin)")
+                    completion(false)
+                    return
+                }
+                completion(true)
             }
-        }
     }
+
 }
