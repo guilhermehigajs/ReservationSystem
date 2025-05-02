@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class RegisterController {
+    private static let TAG = Constant.Controller.registerControllerName
+}

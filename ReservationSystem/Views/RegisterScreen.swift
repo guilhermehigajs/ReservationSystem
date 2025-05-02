@@ -31,7 +31,7 @@ struct RegisterScreen: View {
             TextField("Pin", text: $pin)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 40)
-            TextField("Pin", text: $pin)
+            TextField("Phone", text: $pin)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding(.horizontal, 40)
             TextField("Business Name", text: $businessName)

@@ -10,7 +10,7 @@ import FirebaseAuth
 import FirebaseCore
 import FirebaseFirestore
 
-class DatabaseManagerImp {
+class DatabaseManagerImp: DatabaseManaging {
     private let db: Firestore
     
     init() {
@@ -22,13 +22,11 @@ class DatabaseManagerImp {
         db.collection(Constant.Access.collectionName)
             .whereField(Constant.Access.pinCode, isEqualTo: pin)
             .getDocuments { snapshot, error in
-
                 if let error = error {
                     print("Error getting documents: \(error.localizedDescription)")
                     completion(false)
                     return
                 }
-
                 guard let documents = snapshot?.documents, !documents.isEmpty else {
                     print("No matching documents found for pin: \(pin)")
                     completion(false)
@@ -37,5 +35,4 @@ class DatabaseManagerImp {
                 completion(true)
             }
     }
-
 }

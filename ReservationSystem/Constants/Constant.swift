@@ -14,4 +14,9 @@ struct Constant {
         static let pinCode = "pin_code"
         static let userId = "user_id"
     }
+    
+    struct Controller {
+        static let accessControllerName = "AccessController"
+        static let registerControllerName = "RegisterController"
+    }
 }

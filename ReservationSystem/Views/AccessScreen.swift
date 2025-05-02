@@ -10,7 +10,7 @@ import SwiftUI
 struct AccessScreen: View {
     
     @State private var firstDigit: String = ""
-    private var database = DatabaseManager()
+    private var accessController = AccessController(database: DatabaseManagerImp())
     
     var body: some View {
         VStack {
@@ -26,7 +26,7 @@ struct AccessScreen: View {
                     .frame(width: 160, height: 40)
             }
             Button(action: {
-                database.validateCredentials(firstDigit) { isValid in
+                accessController.checkAccess(firstDigit) { isValid in
                     if isValid {
                         print("logged in successfully")
                     } else {
