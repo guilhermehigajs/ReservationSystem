@@ -43,17 +43,6 @@ struct AccessScreen: View {
                     .cornerRadius(20)
                     .padding(.horizontal, 40)
             }
-            Button(action: {
-            }) {
-                Text("Register")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.blue)
-                    .cornerRadius(20)
-                    .padding(.horizontal, 40)
-            }
             Text("Version 1.0")
                 .font(.caption)
         }
