@@ -6,12 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 @main
 struct ReservationSystemApp: App {
+    
+    let databaseManager = DatabaseManagerImp()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView(databaseManager: databaseManager)
         }
     }
 }

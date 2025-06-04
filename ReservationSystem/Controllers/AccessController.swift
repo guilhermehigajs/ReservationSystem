@@ -8,7 +8,7 @@
 import Foundation
 
 class AccessController {
-    private static let TAG = Constant.Controller.accessControllerName
+    private static let TAG = Constant.AccessController.name
     
     private var database: DatabaseManaging
     

@@ -8,27 +8,33 @@
 import SwiftUI
 
 struct FloorMapScreen: View {
-    @State private var tables: [Table] = [
-        Table(id: UUID(), capacity: 2, number: 10, status: .available, position: CGPoint(x: 100, y: 100)),
-        Table(id: UUID(), capacity: 4, number: 11, status: .occupied, position: CGPoint(x: 200, y: 300)),
-        Table(id: UUID(), capacity: 3, number: 12, status: .bussing, position: CGPoint(x: 300, y: 300)),
-        Table(id: UUID(), capacity: 6, number: 13, status: .orderCheck, position: CGPoint(x: 250, y: 100)),
-        Table(id: UUID(), capacity: 7, number: 14, status: .reserved, position: CGPoint(x: 250, y: 200))
-    ]
+    
+    let databaseManager: DatabaseManaging
+    private let floorMapController: FloorMapController
+    
+    @State private var tables: [Table] = []
+    
+    init(databaseManager: DatabaseManaging) {
+        self.databaseManager = databaseManager
+        self.floorMapController = FloorMapController(database: databaseManager)
+    }
     
     var body: some View {
         ZStack {
-            // Fundo do mapa
-            Color.gray.opacity(0.1).ignoresSafeArea()
-            
-            // Renderiza cada mesa
-            ForEach($tables) { $table in
+            ForEach($tables, id: \.id) { $table in
                 TableView(table: $table)
+            }
+        }
+        .ignoresSafeArea()
+        .background(Color.gray.opacity(0.2))
+        .onAppear {
+            floorMapController.fetchTables(0, false) { fetchedTables in
+                self.tables = fetchedTables
             }
         }
     }
 }
 
 #Preview {
-    FloorMapScreen()
+    FloorMapScreen(databaseManager: DatabaseManagerImp())
 }

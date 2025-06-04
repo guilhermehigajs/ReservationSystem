@@ -54,7 +54,7 @@ struct TableView: View {
 
 struct TablePreviewWrapper: View {
     @State var table = Table(
-        id: UUID(),
+        id: UUID().uuidString, 
         capacity: 4,
         number: 54,
         status: .available,

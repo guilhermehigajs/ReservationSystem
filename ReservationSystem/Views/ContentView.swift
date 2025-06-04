@@ -6,13 +6,16 @@
 //
 
 import SwiftUI
+import FirebaseCore
 
 struct ContentView: View {
+    let databaseManager: DatabaseManaging
+
     var body: some View {
-        AccessScreen()
+        AccessScreen(databaseManager: databaseManager)
     }
 }
 
 #Preview {
-    ContentView()
+    ContentView(databaseManager: DatabaseManagerImp())
 }

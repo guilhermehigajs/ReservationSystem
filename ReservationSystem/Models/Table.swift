@@ -8,7 +8,7 @@
 import Foundation
 
 struct Table: Identifiable {
-    let id: UUID
+    let id: String
     var capacity: Int
     let number: Int
     var status: TableStatus

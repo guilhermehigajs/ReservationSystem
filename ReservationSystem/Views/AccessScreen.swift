@@ -2,12 +2,18 @@ import SwiftUI
 
 struct AccessScreen: View {
     
+    let databaseManager: DatabaseManaging
+    private let accessController: AccessController
+
     @State private var firstDigit: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isLoggedIn = false
-    
-    private var accessController = AccessController(database: DatabaseManagerImp())
+
+    init(databaseManager: DatabaseManaging) {
+        self.databaseManager = databaseManager
+        self.accessController = AccessController(database: databaseManager)
+    }
     
     var body: some View {
         NavigationStack {
@@ -54,14 +60,13 @@ struct AccessScreen: View {
             } message: {
                 Text(alertMessage)
             }
-            // Aqui está o navigationDestination que escuta isLoggedIn
             .navigationDestination(isPresented: $isLoggedIn) {
-                FloorMapScreen()
+                FloorMapScreen(databaseManager: databaseManager)
             }
         }
     }
 }
 
 #Preview {
-    AccessScreen()
+    AccessScreen(databaseManager: DatabaseManagerImp())
 }
