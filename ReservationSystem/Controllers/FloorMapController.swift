@@ -34,11 +34,9 @@ class FloorMapController: ObservableObject {
         database.fetchFloorInf { [weak self] floors in
             DispatchQueue.main.async {
                 self?.floors = floors
-                print(floors.count)
             }
         }
     }
-
     
     func fetchTables(_ level: Int, _ inside: Bool, completion: @escaping ([Table]) -> Void) {
         database.fetchTables(level, inside: inside, completion: completion)
