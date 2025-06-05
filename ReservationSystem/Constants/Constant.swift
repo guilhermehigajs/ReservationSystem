@@ -23,6 +23,10 @@ struct Constant {
             static let level = "level"
             static let inside = "inside"
         }
+        
+        struct Floor {
+            static let name = "floorInformation"
+        }
     }
         
     struct AccessController {

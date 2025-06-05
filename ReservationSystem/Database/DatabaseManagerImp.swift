@@ -99,4 +99,32 @@ class DatabaseManagerImp: DatabaseManaging {
                 completion(tables)
             }
     }
+    
+    func fetchFloorInf(completion: @escaping ([Floor]) -> Void) {
+        db.collection(Constant.Database.Floor.name).getDocuments { snapshot, error in
+            if let error = error {
+                print("[\(Self.TAG)] Error finding floors: \(error.localizedDescription)")
+                completion([])
+                return
+            }
+            
+            guard let documents = snapshot?.documents else {
+                print("[\(Self.TAG)] No documents found.")
+                completion([])
+                return
+            }
+
+            let floors: [Floor] = documents.compactMap { doc -> Floor? in
+                let data = doc.data()
+
+                guard let number = data["number"] as? Int,
+                      let outsideArea = data["outsideArea"] as? Bool else {
+                    print("[\(Self.TAG)] invalid document data: \(doc.documentID)")
+                    return nil
+                }
+                return Floor(id: doc.documentID, number: number, outsideArea: outsideArea)
+            }
+            completion(floors)
+        }
+    }
 }
