@@ -2,11 +2,14 @@ import SwiftUI
 
 struct FloorMapScreen: View {
     
+    let user: User?
+    
     @State private var tables: [Table] = []
     @State private var selectedLevelLocal: Int? = nil
     @StateObject private var floorMapController: FloorMapController
     
-    init(databaseManager: DatabaseManaging) {
+    init(databaseManager: DatabaseManaging, user: User) {
+        self.user = user
         _floorMapController = StateObject(wrappedValue: FloorMapController(database: databaseManager))
     }
     
@@ -14,11 +17,11 @@ struct FloorMapScreen: View {
         VStack(spacing: 20) {
             HStack(alignment: .top, spacing: 30) {
                 VStack(alignment: .leading) {
-                    Text("Select the floor")
+                    Text(Constant.Message.selecteFloor)
                         .font(.caption)
                         .foregroundColor(.gray)
                     Picker("", selection: $selectedLevelLocal) {
-                        Text("Level").tag(nil as Int?)
+                        Text(Constant.Message.selectFloorLevel).tag(nil as Int?)
                         ForEach(floorMapController.availableLevels, id: \.self) { level in
                             Text("\(level)").tag(level as Int?)
                         }
@@ -30,15 +33,15 @@ struct FloorMapScreen: View {
                     }
                 }
                 VStack(alignment: .leading) {
-                    Text("Select the area")
+                    Text(Constant.Message.selecteArea)
                         .font(.caption)
                         .foregroundColor(.gray)
                     Picker("", selection: $floorMapController.selectedOutsideArea) {
-                        Text("Inside").tag(false as Bool?)
+                        Text(Constant.Message.insideArea).tag(false as Bool?)
                         
                         if let selectedLevel = selectedLevelLocal,
                            floorMapController.floors.contains(where: { $0.number == selectedLevel && $0.outsideArea }) {
-                            Text("Outside").tag(true as Bool?)
+                            Text(Constant.Message.outsideArea).tag(true as Bool?)
                         }
                     }
                     .pickerStyle(MenuPickerStyle())
@@ -68,5 +71,6 @@ struct FloorMapScreen: View {
 }
 
 #Preview {
-    FloorMapScreen(databaseManager: DatabaseManagerImp())
+    let mockUser = User(id: "1", name: "guilherme", email: "guilherme@gmail.com", pinCode: "1111", employeeCategory: .generalManager)
+    FloorMapScreen(databaseManager: DatabaseManagerImp(), user: mockUser)
 }

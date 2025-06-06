@@ -16,9 +16,9 @@ class AccessController {
         self.database = database
     }
     
-    func checkAccess(_ pin: String, completion: @escaping (Bool) -> Void) {
-        database.validateCredentials(pin) { isValid in
-            completion(isValid)
+    func checkAccess(_ pin: String, completion: @escaping (Bool, User?) -> Void) {
+        database.validateCredentials(pin) { isValid, user in
+            completion(isValid, user)
         }
     }
 }

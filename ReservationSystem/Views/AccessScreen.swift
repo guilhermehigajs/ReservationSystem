@@ -5,10 +5,12 @@ struct AccessScreen: View {
     let databaseManager: DatabaseManaging
     private let accessController: AccessController
 
+    @State var user: User?
     @State private var firstDigit: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isLoggedIn = false
+
 
     init(databaseManager: DatabaseManaging) {
         self.databaseManager = databaseManager
@@ -18,7 +20,7 @@ struct AccessScreen: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Image("ReservationSystemLogo")
+                Image(Constant.Application.appLogo)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 150, height: 150)
@@ -30,19 +32,21 @@ struct AccessScreen: View {
                     .frame(width: 160, height: 40)
                 
                 Button(action: {
-                    accessController.checkAccess(firstDigit) { isValid in
-                        if isValid {
-                            print("logged in successfully")
+                    accessController.checkAccess(firstDigit) { isValid, returnedUser in
+                        if isValid, let userFromDatabase = returnedUser {
+                            print(Constant.Message.Success.loggedInSuccessfully)
                             firstDigit = ""
                             isLoggedIn = true
+                            user = userFromDatabase
                         } else {
-                            print("Failed to validate credentials")
-                            alertMessage = "Please, contact administrator."
+                            print(Constant.Message.Error.failedValidateCredentials)
+                            alertMessage = Constant.Message.AlertDialog.contactAdmin
                             showAlert = true
                         }
                     }
+
                 }) {
-                    Text("Sign in")
+                    Text(Constant.Message.AlertDialog.signIn)
                         .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
@@ -52,17 +56,22 @@ struct AccessScreen: View {
                         .padding(.horizontal, 40)
                 }
                 
-                Text("Version 1.0")
+                Text(Constant.Application.appVersion)
                     .font(.caption)
             }
-            .alert("Credentials not recognized", isPresented: $showAlert) {
-                Button("OK", role: .cancel) { }
+            .alert(Constant.Message.Error.credentialsNotRecognized, isPresented: $showAlert) {
+                Button(Constant.Message.AlertDialog.ok, role: .cancel) { }
             } message: {
                 Text(alertMessage)
             }
             .navigationDestination(isPresented: $isLoggedIn) {
-                FloorMapScreen(databaseManager: databaseManager)
+                if let validUser = user {
+                    FloorMapScreen(databaseManager: databaseManager, user: validUser)
+                } else {
+                    Text(alertMessage)
+                }
             }
+
         }
     }
 }
