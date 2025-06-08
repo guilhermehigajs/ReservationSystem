@@ -33,7 +33,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BA51503A2DC1817B00D248C2 /* ReservationSystem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReservationSystem.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BA51503A2DC1817B00D248C2 /* Malibu Farm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Malibu Farm.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5150472DC1817B00D248C2 /* ReservationSystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReservationSystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA5150512DC1817B00D248C2 /* ReservationSystemUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReservationSystemUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -100,7 +100,7 @@
 		BA51503B2DC1817B00D248C2 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BA51503A2DC1817B00D248C2 /* ReservationSystem.app */,
+				BA51503A2DC1817B00D248C2 /* Malibu Farm.app */,
 				BA5150472DC1817B00D248C2 /* ReservationSystemTests.xctest */,
 				BA5150512DC1817B00D248C2 /* ReservationSystemUITests.xctest */,
 			);
@@ -135,7 +135,7 @@
 				BA32B53D2DC1EAA800D48CC3 /* FirebaseStorage */,
 			);
 			productName = ReservationSystem;
-			productReference = BA51503A2DC1817B00D248C2 /* ReservationSystem.app */;
+			productReference = BA51503A2DC1817B00D248C2 /* Malibu Farm.app */;
 			productType = "com.apple.product-type.application";
 		};
 		BA5150462DC1817B00D248C2 /* ReservationSystemTests */ = {
@@ -421,6 +421,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -432,7 +433,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.higa.ios.ReservationSystem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Malibu Farm";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -448,6 +449,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -459,7 +461,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.higa.ios.ReservationSystem;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Malibu Farm";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

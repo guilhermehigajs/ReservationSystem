@@ -15,6 +15,7 @@ class FloorMapController: ObservableObject {
     @Published var selectedOutsideArea: Bool?
     
     private var database: DatabaseManaging
+    private var user: User
     
     var availableLevels: [Int] {
         Array(Set(floors.map { $0.number })).sorted()
@@ -26,8 +27,13 @@ class FloorMapController: ObservableObject {
         return Array(Set(filteredFloors.map { $0.outsideArea })).sorted { !$0 && $1 }
     }
     
-    init(database: DatabaseManaging) {
+    init(database: DatabaseManaging, user: User) {
         self.database = database
+        self.user = user
+    }
+    
+    var getAccessLevel: EmployeeCategory {
+        user.employeeCategory
     }
     
     func loadFloorInf() {

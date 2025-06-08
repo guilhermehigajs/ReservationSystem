@@ -13,6 +13,7 @@ struct Table: Identifiable {
     let number: Int
     var status: TableStatus
     var position: CGPoint
+    var orders: [Order] = []
 }
 
 enum TableStatus {
