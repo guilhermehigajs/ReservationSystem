@@ -39,7 +39,6 @@ struct Constant {
                 static let ordercheck = "ordercheck"
                 static let reserved = "reserved"
             }
-            
         }
         
         struct Floor {
@@ -58,7 +57,6 @@ struct Constant {
         static let title = "Floor Map"
         static let calendar = "calendar"
         static let clock = "clock"
-
     }
     
     struct AnalysisController {

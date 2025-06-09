@@ -4,15 +4,13 @@
 //
 //  Created by Guilherme Higa on 5/15/25.
 //
+
 import SwiftUI
 
 struct FloorMapScreen: View {
 
     let user: User
     @State private var tables: [Table] = []
-    @State private var showFinanceScreen = false
-    @State private var showClockInScreen = false
-    @State private var showScheduleScreen = false
     @State private var selectedLevelLocal: Int? = nil
     @StateObject private var floorMapController: FloorMapController
 
@@ -45,6 +43,8 @@ struct FloorMapScreen: View {
                     .background(Color.white.opacity(0.4))
                     .cornerRadius(16)
                     .padding(.horizontal)
+
+                    Spacer()
 
                     HStack(alignment: .top, spacing: 30) {
                         VStack(alignment: .leading) {
@@ -104,40 +104,6 @@ struct FloorMapScreen: View {
             }
             .navigationTitle(Constant.FloorMapController.title)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    
-                    Button {
-                        showScheduleScreen = true
-                    } label: {
-                        Image(systemName: Constant.FloorMapController.calendar)
-                            .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.3))
-                    }
-                    
-                    Button {
-                        showClockInScreen = true
-                    } label: {
-                        Image(systemName: Constant.FloorMapController.clock)
-                            .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.3))
-                    }
-                    
-                    Button {
-                        showFinanceScreen = true
-                    } label: {
-                        Image(systemName: Constant.ImageName.analysis)
-                            .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.3))
-                    }
-                }
-            }
-            .navigationDestination(isPresented: $showFinanceScreen) {
-                AnalysisScreen(user: user)
-            }
-            .navigationDestination(isPresented: $showClockInScreen) {
-                ClockInScreen(userName: "Guilherme")
-            }
-            .navigationDestination(isPresented: $showScheduleScreen) {
-                ScheduleScreen()
-            }
         }
     }
 }

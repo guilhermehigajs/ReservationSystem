@@ -84,7 +84,7 @@ struct AccessScreen: View {
             }
             .navigationDestination(isPresented: $isLoggedIn) {
                 if let validUser = user {
-                    FloorMapScreen(databaseManager: databaseManager, user: validUser)
+                    MainScreen(user: validUser, databaseManager: databaseManager)
                 } else {
                     Text(alertMessage)
                 }

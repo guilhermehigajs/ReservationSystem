@@ -24,8 +24,11 @@ struct AnalysisScreen: View {
 //                .frame(maxWidth: .infinity, maxHeight: .infinity)
 //        }
 //        .navigationBarTitleDisplayMode(.inline)
-        ServerView()
+//        ServerView()
+//            .navigationBarTitleDisplayMode(.inline)
+        ManagerView()
             .navigationBarTitleDisplayMode(.inline)
+        
     }
 
     @ViewBuilder
