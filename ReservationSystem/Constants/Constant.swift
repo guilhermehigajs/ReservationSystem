@@ -9,7 +9,7 @@ struct Constant {
     struct Application {
         static let appName = "Reservation System"
         static let appLogo = "ReservationSystemLogo"
-        static let appVersion = "Version 1.0"
+        static let appVersion = "Version 2.1.4"
     }
     
     struct Database {
