@@ -11,6 +11,8 @@ struct FloorMapScreen: View {
     let user: User
     @State private var tables: [Table] = []
     @State private var showFinanceScreen = false
+    @State private var showClockInScreen = false
+    @State private var showScheduleScreen = false
     @State private var selectedLevelLocal: Int? = nil
     @StateObject private var floorMapController: FloorMapController
 
@@ -104,12 +106,21 @@ struct FloorMapScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
-                    Image(systemName: Constant.FloorMapController.calendar)
-                        .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.3))
-
-                    Image(systemName: Constant.FloorMapController.clock)
-                        .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.3))
-
+                    
+                    Button {
+                        showScheduleScreen = true
+                    } label: {
+                        Image(systemName: Constant.FloorMapController.calendar)
+                            .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.3))
+                    }
+                    
+                    Button {
+                        showClockInScreen = true
+                    } label: {
+                        Image(systemName: Constant.FloorMapController.clock)
+                            .foregroundColor(Color(red: 0.4, green: 0.6, blue: 0.3))
+                    }
+                    
                     Button {
                         showFinanceScreen = true
                     } label: {
@@ -120,6 +131,12 @@ struct FloorMapScreen: View {
             }
             .navigationDestination(isPresented: $showFinanceScreen) {
                 AnalysisScreen(user: user)
+            }
+            .navigationDestination(isPresented: $showClockInScreen) {
+                ClockInScreen(userName: "Guilherme")
+            }
+            .navigationDestination(isPresented: $showScheduleScreen) {
+                ScheduleScreen()
             }
         }
     }
