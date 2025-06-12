@@ -19,15 +19,10 @@ struct ClockInScreen: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 0.996, green: 0.898, blue: 0.635),
-                    Color(red: 0.753, green: 0.686, blue: 0.486)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            BackgroundGradient(colors: [
+                Color(red: 0.996, green: 0.898, blue: 0.635),
+                Color(red: 0.753, green: 0.686, blue: 0.486)
+            ])
 
             VStack {
                 Spacer()
@@ -38,7 +33,7 @@ struct ClockInScreen: View {
                             .font(.title2)
                             .foregroundColor(.black.opacity(0.8))
 
-                        Text("Shift Control")
+                        Text(Constant.ClockInController.shiftControl)
                             .font(.title)
                             .bold()
                             .foregroundColor(.black)
@@ -52,14 +47,14 @@ struct ClockInScreen: View {
                                 Button {
                                     simulateAction(.returnFromBreak)
                                 } label: {
-                                    Label("Return from Break", systemImage: "play.circle")
+                                    Label(Constant.ClockInController.returnBreak, systemImage: Constant.ClockInController.returnBreakImage)
                                 }
                                 .buttonStyle(ShiftButtonStyle())
                             } else {
                                 Button {
                                     simulateAction(.breakTime)
                                 } label: {
-                                    Label("Break", systemImage: "pause.circle")
+                                    Label(Constant.ClockInController.breakShift, systemImage: Constant.ClockInController.breakShiftImage)
                                 }
                                 .buttonStyle(ShiftButtonStyle())
                             }
@@ -67,7 +62,7 @@ struct ClockInScreen: View {
                             Button {
                                 simulateAction(.endShift)
                             } label: {
-                                Label("End Shift", systemImage: "stop.circle")
+                                Label(Constant.ClockInController.endShift, systemImage: Constant.ClockInController.endShiftImage)
                             }
                             .buttonStyle(ShiftButtonStyle())
                         }
@@ -75,7 +70,7 @@ struct ClockInScreen: View {
                         Button {
                             simulateAction(.clockIn)
                         } label: {
-                            Label("Clock In", systemImage: "clock")
+                            Label(Constant.ClockInController.clockIn, systemImage: Constant.ClockInController.clockInImage)
                         }
                         .buttonStyle(ShiftButtonStyle())
                     }
@@ -103,17 +98,17 @@ struct ClockInScreen: View {
             switch action {
             case .clockIn:
                 hasClockedIn = true
-                confirmationMessage = "✅ Clock In completed"
+                confirmationMessage = Constant.ClockInController.clockInCompleted
             case .breakTime:
                 isOnBreak = true
-                confirmationMessage = "☕ Break started"
+                confirmationMessage = Constant.ClockInController.breakStarted
             case .returnFromBreak:
                 isOnBreak = false
-                confirmationMessage = "▶️ Returned from break"
+                confirmationMessage = Constant.ClockInController.returnBreakCompleted
             case .endShift:
                 hasClockedIn = false
                 isOnBreak = false
-                confirmationMessage = "🔚 Shift ended"
+                confirmationMessage = Constant.ClockInController.shiftEnded
             }
             showConfirmationText = true
         }
@@ -128,22 +123,6 @@ struct ClockInScreen: View {
 
 enum ShiftAction {
     case clockIn, breakTime, returnFromBreak, endShift
-}
-
-struct ShiftButtonStyle: ButtonStyle {
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .font(.headline)
-            .padding()
-            .frame(maxWidth: .infinity)
-            .background(Color.black.opacity(configuration.isPressed ? 0.1 : 0.05))
-            .foregroundColor(.black)
-            .cornerRadius(12)
-            .overlay(
-                RoundedRectangle(cornerRadius: 12)
-                    .stroke(Color.black.opacity(0.2), lineWidth: 1)
-            )
-    }
 }
 
 #Preview {

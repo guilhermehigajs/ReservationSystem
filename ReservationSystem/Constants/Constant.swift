@@ -7,7 +7,7 @@
 
 struct Constant {
     struct Application {
-        static let appName = "Reservation System"
+        static let appName = "Malibu Farm"
         static let appLogo = "ReservationSystemLogo"
         static let appVersion = "Version 2.1.4"
     }
@@ -54,16 +54,75 @@ struct Constant {
     
     struct FloorMapController {
         static let name = "FloorMapController"
+        static let nameScreen = "Floor Map"
         static let title = "Floor Map"
         static let calendar = "calendar"
         static let clock = "clock"
+        static let icon = "square.grid.3x3.middle.filled"
     }
     
     struct AnalysisController {
+        static let nameScreen = "Analysis"
         static let name = "AnalysisController"
         static let title = "General Analysis"
+        static let icon = "chart.bar"
     }
     
+    struct ClockInController {
+        static let nameScreen = "Clock In"
+        static let shiftControl = "Shift Control"
+        static let returnBreak = "Return from Break"
+        static let returnBreakImage = "play.circle"
+        static let breakShift = "Break"
+        static let breakShiftImage = "pause.circle"
+        static let endShift = "End Shift"
+        static let endShiftImage = "stop.circle"
+        static let clockIn = "Clock In"
+        static let clockInImage = "clock"
+        static let clockInCompleted = "✅ Clock In completed"
+        static let breakStarted = "☕ Break started"
+        static let returnBreakCompleted = "▶️ Returned from break"
+        static let shiftEnded = "🔚 Shift ended"
+    }
+    
+    struct MainController {
+        static let name = "MainController"
+        static let menuLeft = "sidebar.left"
+        static let todayShift = "Your Shift Today"
+        static let offerShift = "Offer your Shift"
+    }
+    
+    struct ScheduleController {
+        static let nameScreen = "ScheduleScreen"
+        static let name = "Schedule"
+        static let icon = "calendar"
+        static let off = "Off"
+        static let workedHours = "hourglass.bottomhalf.filled"
+        static let scheduleShift = "Scheduled Shift —"
+        static let dayOff = "Day off"
+    }
+    
+    struct ShoppingListController {
+        static let nameScreen = "Shopping List"
+        static let icon = "cart"
+        static let generatedList = "Generated List:"
+        static let generatedList2 = "Generated List"
+
+    }
+    
+    struct PaymentController {
+        static let nameScreen = "Payment"
+        static let icon = "dollarsign.circle.fill"
+        static let title = "Payment Overview"
+        static let weeklyPerformace = "Weekly Performance"
+        static let day = "Day"
+        static let expected = "Expected"
+        static let type = "Type"
+        static let actual = "Actual"
+        static let totalExpected = "Expected Total: $"
+        static let actualTotal = "Actual Total: $"
+    }
+
     struct Message {
         static let selecteFloor = "Selecte the floor"
         static let selectFloorLevel = "Level"

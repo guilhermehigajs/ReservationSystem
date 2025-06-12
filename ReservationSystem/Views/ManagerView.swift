@@ -108,15 +108,10 @@ struct ManagerView: View {
             }
         }
         .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 1.0, green: 0.976, blue: 0.769),
-                    Color(red: 0.773, green: 0.882, blue: 0.647)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            BackgroundGradient(colors: [
+                Color(red: 1.0, green: 0.976, blue: 0.769),
+                Color(red: 0.773, green: 0.882, blue: 0.647)
+            ])
         )
     }
 

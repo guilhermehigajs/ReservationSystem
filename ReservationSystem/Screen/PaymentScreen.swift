@@ -4,6 +4,7 @@
 //
 //  Created by Guilherme Higa on 6/9/25.
 //
+
 import SwiftUI
 import Charts
 
@@ -51,7 +52,7 @@ struct PaymentScreen: View {
 
             HStack {
                 Spacer()
-                Text("Payment Overview")
+                Text(Constant.PaymentController.title)
                     .font(.title2)
                     .bold()
                 Spacer()
@@ -61,33 +62,33 @@ struct PaymentScreen: View {
                 .font(.headline)
                 .padding(.horizontal)
 
-            Text("Weekly Performance")
+            Text(Constant.PaymentController.weeklyPerformace)
                 .font(.subheadline)
                 .padding(.horizontal)
 
             Chart {
                 ForEach(data) { entry in
                     BarMark(
-                        x: .value("Day", entry.day),
-                        y: .value("Expected", entry.expectedEarnings)
+                        x: .value(Constant.PaymentController.day, entry.day),
+                        y: .value(Constant.PaymentController.expected, entry.expectedEarnings)
                     )
                     .foregroundStyle(Color.green.opacity(0.6))
-                    .position(by: .value("Type", "Expected"))
+                    .position(by: .value(Constant.PaymentController.type, Constant.PaymentController.expected))
 
                     BarMark(
-                        x: .value("Day", entry.day),
-                        y: .value("Actual", entry.actualEarnings)
+                        x: .value(Constant.PaymentController.day, entry.day),
+                        y: .value(Constant.PaymentController.actual, entry.actualEarnings)
                     )
                     .foregroundStyle(Color.blue.opacity(0.6))
-                    .position(by: .value("Type", "Actual"))
+                    .position(by: .value(Constant.PaymentController.type, Constant.PaymentController.actual))
                 }
             }
             .frame(height: 220)
             .padding(.horizontal)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Expected Total: $\(String(format: "%.2f", totalExpected)) • \(String(format: "%.1f", totalExpectedHours))h")
-                Text("Actual Total: $\(String(format: "%.2f", totalActual)) • \(String(format: "%.1f", totalActualHours))h")
+                Text(Constant.PaymentController.totalExpected + "\(String(format: "%.2f", totalExpected)) • \(String(format: "%.1f", totalExpectedHours))h")
+                Text(Constant.PaymentController.actualTotal + "\(String(format: "%.2f", totalActual)) • \(String(format: "%.1f", totalActualHours))h")
             }
             .font(.subheadline)
             .padding(.horizontal)
@@ -95,15 +96,10 @@ struct PaymentScreen: View {
             Spacer()
         }
         .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 1.0, green: 0.976, blue: 0.769),
-                    Color(red: 0.773, green: 0.882, blue: 0.647)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            BackgroundGradient(colors: [
+                Color(red: 1.0, green: 0.976, blue: 0.769),
+                Color(red: 0.773, green: 0.882, blue: 0.647)
+            ])
         )
     }
 }

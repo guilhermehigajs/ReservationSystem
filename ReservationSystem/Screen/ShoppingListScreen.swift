@@ -27,7 +27,7 @@ struct ShoppingListScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Shopping List")
+            Text(Constant.ShoppingListController.nameScreen)
                 .font(.title2)
                 .bold()
                 .padding(.horizontal)
@@ -57,9 +57,9 @@ struct ShoppingListScreen: View {
 
                 Button(action: {
                     let selectedItems = shoppingItems.filter { $0.quantity > 0 }
-                    print("Generated List:", selectedItems.map { "\($0.name): \($0.quantity)" })
+                    print(Constant.ShoppingListController.generatedList, selectedItems.map { "\($0.name): \($0.quantity)" })
                 }) {
-                    Text("Generate List")
+                    Text(Constant.ShoppingListController.generatedList2)
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -75,15 +75,10 @@ struct ShoppingListScreen: View {
         }
         .padding(.top)
         .background(
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 1.0, green: 0.976, blue: 0.769),
-                    Color(red: 0.773, green: 0.882, blue: 0.647)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            BackgroundGradient(colors: [
+                Color(red: 1.0, green: 0.976, blue: 0.769),
+                Color(red: 0.773, green: 0.882, blue: 0.647)
+            ])
         )
     }
 }

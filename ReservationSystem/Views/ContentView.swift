@@ -12,9 +12,12 @@ struct ContentView: View {
     let databaseManager: DatabaseManaging
 
     var body: some View {
-        AccessScreen(databaseManager: databaseManager)
+        NavigationStack {
+            AccessScreen(databaseManager: databaseManager)
+        }
     }
 }
+
 
 #Preview {
     ContentView(databaseManager: DatabaseManagerImp())

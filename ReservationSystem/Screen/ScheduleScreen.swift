@@ -1,3 +1,10 @@
+//
+//  ScheduleScreen.swiftUi
+//  ReservationSystem
+//
+//  Created by Guilherme Higa on 6/9/25.
+//
+
 import SwiftUI
 
 struct ScheduleScreen: View {
@@ -6,15 +13,10 @@ struct ScheduleScreen: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 0.996, green: 0.898, blue: 0.635),
-                    Color(red: 0.753, green: 0.686, blue: 0.486)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            BackgroundGradient(colors: [
+                Color(red: 0.996, green: 0.898, blue: 0.635),
+                Color(red: 0.753, green: 0.686, blue: 0.486)
+            ])
 
             VStack(alignment: .leading, spacing: 16) {
                 Text(selectedDate.formatted(.dateTime.month(.wide)))
@@ -54,7 +56,7 @@ struct ScheduleScreen: View {
                     VStack(spacing: 12) {
                         ForEach(currentWeek, id: \.self) { date in
                             let shift = mockShifts[date.onlyDate()]
-                            let role = shift?.role ?? "Off"
+                            let role = shift?.role ?? Constant.ScheduleController.off
                             let hasShift = shift != nil
 
                             DisclosureGroup {
@@ -63,17 +65,17 @@ struct ScheduleScreen: View {
                                         HStack(alignment: .top) {
                                             VStack(alignment: .leading, spacing: 6) {
                                                 HStack {
-                                                    Image(systemName: "clock.fill").foregroundColor(.blue)
+                                                    Image(systemName: Constant.ClockInController.clockIn).foregroundColor(.blue)
                                                     Text("\(shift.startTime) - \(shift.endTime)")
                                                 }
 
                                                 HStack {
-                                                    Image(systemName: "dollarsign.circle.fill").foregroundColor(.green)
+                                                    Image(systemName: Constant.PaymentController.icon).foregroundColor(.green)
                                                     Text("$\(shift.estimatedPay, specifier: "%.2f")")
                                                 }
 
                                                 HStack {
-                                                    Image(systemName: "hourglass.bottomhalf.filled").foregroundColor(.orange)
+                                                    Image(systemName: Constant.ScheduleController.workedHours).foregroundColor(.orange)
                                                     Text("\(shift.hoursWorked, specifier: "%.1f") hours")
                                                 }
                                             }
@@ -89,11 +91,11 @@ struct ScheduleScreen: View {
                                         .font(.headline)
 
                                     if hasShift {
-                                        Text("Scheduled Shift — \(role)")
+                                        Text(Constant.ScheduleController.scheduleShift + " \(role)")
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     } else {
-                                        Text("Day off")
+                                        Text(Constant.ScheduleController.dayOff)
                                             .foregroundColor(.secondary)
                                             .font(.subheadline)
                                     }
