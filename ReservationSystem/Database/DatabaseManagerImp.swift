@@ -148,4 +148,23 @@ class DatabaseManagerImp: DatabaseManaging {
             completion(floors)
         }
     }
+    
+    func addNewUser(_ user: User) {
+        let docRef = db.collection(Constant.Database.Access.name).document(user.id)
+        let data: [String: Any] = [
+            Constant.Database.Access.userName: user.name,
+            Constant.Database.Access.email: user.email,
+            Constant.Database.Access.pinCode: user.pinCode,
+            Constant.Database.Access.employeeCategory: user.employeeCategory.rawValue
+        ]
+        
+        docRef.setData(data) { error in
+            if let error = error {
+                print("[\(Self.TAG)] " + Constant.Message.Error.faliedToRegisterNewUser + " : \(error.localizedDescription)")
+            } else {
+                print("[\(Self.TAG)] Usuário \(user.name) adicionado com sucesso.")
+            }
+        }
+    }
+
 }

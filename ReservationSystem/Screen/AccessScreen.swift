@@ -10,6 +10,7 @@ struct AccessScreen: View {
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isLoggedIn = false
+    @State private var isRegistering = false
 
     init(databaseManager: DatabaseManaging) {
         self.databaseManager = databaseManager
@@ -23,7 +24,7 @@ struct AccessScreen: View {
                 Color(red: 0.753, green: 0.686, blue: 0.486)
             ])
 
-            VStack(spacing: 30) {
+            VStack(spacing: 20) {
                 Image(Constant.Application.appLogo)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -38,28 +39,41 @@ struct AccessScreen: View {
                     .cornerRadius(25)
                     .padding(.horizontal, 40)
 
-                Button(action: {
-                    accessController.checkAccess(firstDigit) { isValid, returnedUser in
-                        if isValid, let userFromDatabase = returnedUser {
-                            print(Constant.Message.Success.loggedInSuccessfully)
-                            firstDigit = ""
-                            isLoggedIn = true
-                            user = userFromDatabase
-                        } else {
-                            print(Constant.Message.Error.failedValidateCredentials)
-                            alertMessage = Constant.Message.AlertDialog.contactAdmin
-                            showAlert = true
+                VStack(spacing: 10) {
+                    Button(action: {
+                        accessController.checkAccess(firstDigit) { isValid, returnedUser in
+                            if isValid, let userFromDatabase = returnedUser {
+                                firstDigit = ""
+                                isLoggedIn = true
+                                user = userFromDatabase
+                            } else {
+                                alertMessage = Constant.Message.AlertDialog.contactAdmin
+                                showAlert = true
+                            }
                         }
+                    }) {
+                        Text(Constant.Message.AlertDialog.signIn)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 1.0, green: 0.718, blue: 0.302))
+                            .cornerRadius(20)
+                            .padding(.horizontal, 40)
                     }
-                }) {
-                    Text(Constant.Message.AlertDialog.signIn)
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .frame(maxWidth: .infinity)
-                        .padding()
-                        .background(Color(red: 1.0, green: 0.718, blue: 0.302))
-                        .cornerRadius(20)
-                        .padding(.horizontal, 40)
+                    
+                    Button(action: {
+                        isRegistering = true
+                    }) {
+                        Text(Constant.AccessController.addNewUserButtomMessage)
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color(red: 1.0, green: 0.718, blue: 0.302))
+                            .cornerRadius(20)
+                            .padding(.horizontal, 40)
+                    }
                 }
 
                 Text(Constant.Application.appVersion)
@@ -83,9 +97,13 @@ struct AccessScreen: View {
                 Text(alertMessage)
             }
         }
+        .navigationDestination(isPresented: $isRegistering) {
+            NewUserScreen(databaseManager: databaseManager)
+        }
     }
 }
 
 #Preview {
     AccessScreen(databaseManager: DatabaseManagerImp())
 }
+

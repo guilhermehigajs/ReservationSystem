@@ -50,6 +50,11 @@ struct Constant {
         
     struct AccessController {
         static let name = "AccessController"
+        static let addNewUserButtomMessage = "Register new user"
+    }
+    
+    struct NewUserController {
+        static let name = "NewUserController"
     }
     
     struct FloorMapController {
@@ -144,6 +149,7 @@ struct Constant {
             static let noMatchingUserForPin = "No matching documents found for pin"
             static let invalidUserDataFormat = "Invalid user data format"
             static let unsupportedCategory = "Category not supported"
+            static let faliedToRegisterNewUser = "Fairly to register new user"
         }
         
         struct Success {

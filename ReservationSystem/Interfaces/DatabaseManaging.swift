@@ -11,5 +11,6 @@ protocol DatabaseManaging {
     func validateCredentials(_ pin: String, completion: @escaping (Bool, User?) -> Void)
     func fetchTables(_ level: Int, inside: Bool, completion: @escaping ([Table]) -> Void)
     func fetchFloorInf(completion: @escaping ([Floor]) -> Void)
+    func addNewUser(_ user: User)
 }
 
