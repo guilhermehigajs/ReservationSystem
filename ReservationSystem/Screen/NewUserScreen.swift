@@ -12,6 +12,9 @@ struct NewUserScreen: View {
     let databaseManager: DatabaseManaging
     let newUserController: NewUserController
     
+    @State private var nameEdited = false
+    @State private var nameError: String?
+    
     @Environment(\.dismiss) private var dismiss
     
     @State private var name: String = ""
@@ -28,57 +31,50 @@ struct NewUserScreen: View {
     
     var body: some View {
         ZStack {
-            BackgroundGradient(colors: [
-                Color(red: 0.996, green: 0.898, blue: 0.635),
-                Color(red: 0.753, green: 0.686, blue: 0.486),
-                Color(red: 0.6, green: 0.5, blue: 0.3)
-            ])
+            BackgroundGradient()
             ScrollView {
                 VStack(spacing: 16) {
-                    Text("Cadastro de Usuário")
+                    Text(Constant.NewUser.title)
                         .font(.title2)
                         .bold()
                         .padding(.top, 12)
                     
-                    TextField("Nome", text: $name)
-                        .textInputAutocapitalization(.words)
-                        .autocorrectionDisabled(true)
-                        .padding()
-                        .frame(height: 50)
-                        .background(Color.white.opacity(0.9))
-                        .cornerRadius(14)
-                        .padding(.horizontal, 40)
-                    
-                    TextField("E-mail", text: $email)
+                    VStack(spacing: 6) {
+                        ValidatedTextField(
+                            title: Constant.NewUser.userName,
+                            text: $name,
+                            validate: { newUserController.validateUserInputs($0) },
+                            errorMessage: Constant.NewUser.nameMissing
+                        )
+                    }
+                    VStack(spacing: 6) {
+                        ValidatedTextField(
+                            title: Constant.NewUser.userEmail,
+                            text: $email,
+                            validate: { newUserController.validateUserInputs($0) },
+                            errorMessage: Constant.NewUser.emailMissing
+                        )
                         .keyboardType(.emailAddress)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(true)
-                        .padding()
-                        .frame(height: 50)
-                        .background(Color.white.opacity(0.9))
-                        .cornerRadius(14)
-                        .padding(.horizontal, 40)
-                    
-                    SecureField("PIN/Senha", text: $pinCode)
-                        .keyboardType(.numberPad)
-                        .padding()
-                        .frame(height: 50)
-                        .background(Color.white.opacity(0.9))
-                        .cornerRadius(14)
-                        .padding(.horizontal, 40)
-                    
-                    TextField("Categoria", text: $categoryInput)
-                        .textInputAutocapitalization(.never)
-                        .autocorrectionDisabled(true)
-                        .padding()
-                        .frame(height: 50)
-                        .background(Color.white.opacity(0.9))
-                        .cornerRadius(14)
-                        .padding(.horizontal, 40)
-                    
+                    }
+                    VStack(spacing: 6) {
+                        ValidatedSecureFieldText(
+                            title: Constant.NewUser.userPin,
+                            text: $pinCode,
+                            validate: { newUserController.validateUserInputs($0) },
+                            errorMessage: Constant.NewUser.pinMissing
+                        )
+                    }
+                    VStack(spacing: 6) {
+                        ValidatedTextField(
+                            title: Constant.NewUser.userCategory,
+                            text: $categoryInput,
+                            validate: { newUserController.validateUserInputs($0) },
+                            errorMessage: Constant.NewUser.roleMissing
+                        )
+                    }
                     Button {
                         guard let category = parseCategory(from: categoryInput) else {
-                            alertMessage = "Categoria inválida. Use 1-4 ou host/server/manager/generalManager."
+                            alertMessage = Constant.Message.Error.wrongCategoryChoosen
                             showAlert = true
                             return
                         }
@@ -89,36 +85,28 @@ struct NewUserScreen: View {
                             pinCode: pinCode,
                             employeeCategory: category
                         )
-                        alertMessage = "Usuário \(newUser.name) criado com sucesso."
+                        alertMessage = Constant.Message.Success.userRegistered
                         showAlert = true
                         newUserController.registerNewUser(newUser)
                     } label: {
-                        Text("Cadastrar")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(red: 1.0, green: 0.718, blue: 0.302))
-                            .cornerRadius(20)
-                            .padding(.horizontal, 40)
+                        ButtomShape(title: Constant.NewUser.addUserButtom)
                     }
-                    .disabled(name.isEmpty || email.isEmpty || pinCode.isEmpty || categoryInput.isEmpty)
-                    .opacity((name.isEmpty || email.isEmpty || pinCode.isEmpty || categoryInput.isEmpty) ? 0.6 : 1)
+                    .disabled(!isFormValid)
+                    .opacity(isFormValid ? 1 : 0.6)
                     
                     Button {
                         dismiss()
                     } label: {
-                        Text("Cancelar")
-                            .font(.subheadline)
-                            .foregroundColor(.white.opacity(0.9))
-                            .padding(.top, 4)
+                        ButtomShape(title: Constant.NewUser.cancelUserButtom)
                     }
+                    .disabled(!isFormValid)
+                    .opacity(isFormValid ? 1 : 0.6)
                 }
                 .padding(.bottom, 40)
             }
         }
-        .alert("Cadastro", isPresented: $showAlert) {
-            Button("OK") { dismiss() }
+        .alert(Constant.Message.Success.userRegistered, isPresented: $showAlert) {
+            Button(Constant.Message.AlertDialog.ok) { dismiss() }
         } message: {
             Text(alertMessage)
         }
@@ -136,6 +124,17 @@ struct NewUserScreen: View {
         case "generalmanager", "general manager", "gm": return .generalManager
         default: return nil
         }
+    }
+    
+    private var showNameError: Bool {
+        nameEdited && !newUserController.validateUserInputs(name)
+    }
+    
+    private var isFormValid: Bool {
+        !name.isEmpty &&
+        !email.isEmpty &&
+        !pinCode.isEmpty &&
+        !categoryInput.isEmpty
     }
 }
 

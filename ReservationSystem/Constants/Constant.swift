@@ -53,8 +53,23 @@ struct Constant {
         static let addNewUserButtomMessage = "Register new user"
     }
     
-    struct NewUserController {
-        static let name = "NewUserController"
+    struct NewUser {
+        static let title = "Register new user"
+        static let userName = "Name"
+        static let userEmail = "Email"
+        static let userPin = "Pin"
+        static let userCategory = "Category/Role"
+        static let addUserButtom = "Add User"
+        static let cancelUserButtom = "Cancel"
+        static let nameMissing = "name is missing"
+        static let emailMissing = "email is missing"
+        static let pinMissing = "pin is missing"
+        static let roleMissing = "role is missing"
+        
+        
+        struct Controller {
+            static let name = "NewUserController"
+        }
     }
     
     struct FloorMapController {
@@ -150,10 +165,13 @@ struct Constant {
             static let invalidUserDataFormat = "Invalid user data format"
             static let unsupportedCategory = "Category not supported"
             static let faliedToRegisterNewUser = "Fairly to register new user"
+            static let wrongCategoryChoosen = "Categoria inválida. Use 1-4 ou host/server/manager/generalManager."
+            static let emptyField = "This field is empty, please fill it"
         }
         
         struct Success {
             static let loggedInSuccessfully = "Logged in successfully."
+            static let userRegistered = "User successfully registered."
         }
         
         struct AlertDialog {

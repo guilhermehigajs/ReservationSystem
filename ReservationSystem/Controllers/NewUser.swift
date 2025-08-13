@@ -8,7 +8,7 @@
 import Foundation
 
 class NewUserController {
-    private static let TAG = Constant.NewUserController.name
+    private static let TAG = Constant.NewUser.Controller.name
     
     private var database: DatabaseManaging
     
@@ -18,5 +18,9 @@ class NewUserController {
     
     func registerNewUser(_ user: User) {
         database.addNewUser(user)
+    }
+    
+    func validateUserInputs(_ input: String) -> Bool {
+        return !input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 }
