@@ -12,6 +12,7 @@ struct User: Identifiable {
     var name: String
     var email: String
     var pinCode: String
+//    var photoURL: String?
     var employeeCategory: EmployeeCategory
 }
 

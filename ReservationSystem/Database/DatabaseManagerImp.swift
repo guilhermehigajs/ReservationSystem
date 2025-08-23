@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseCore
+import FirebaseStorage
 import FirebaseFirestore
 
 class DatabaseManagerImp: DatabaseManaging {
@@ -151,12 +152,16 @@ class DatabaseManagerImp: DatabaseManaging {
     
     func addNewUser(_ user: User) {
         let docRef = db.collection(Constant.Database.Access.name).document(user.id)
-        let data: [String: Any] = [
+        var data: [String: Any] = [
             Constant.Database.Access.userName: user.name,
             Constant.Database.Access.email: user.email,
             Constant.Database.Access.pinCode: user.pinCode,
             Constant.Database.Access.employeeCategory: user.employeeCategory.rawValue
         ]
+        
+//        if let photoURL = user.photoURL {
+//            data[Constant.Database.Access.photoURL] = photoURL
+//        }
         
         docRef.setData(data) { error in
             if let error = error {
@@ -166,5 +171,17 @@ class DatabaseManagerImp: DatabaseManaging {
             }
         }
     }
-
+    
+    func uploadProfileImage(_ image: UIImage, userId: String) async throws -> String {
+        guard let data = image.jpegData(compressionQuality: 0.85) else {
+            throw NSError(domain: "NewUserScreen", code: 1,
+                          userInfo: [NSLocalizedDescriptionKey: "Falha ao converter imagem para JPEG"])
+        }
+        let ref = Storage.storage().reference().child("profile_photos/\(userId).jpg")
+        let metadata = StorageMetadata()
+        metadata.contentType = "image/jpeg"
+        _ = try await ref.putDataAsync(data, metadata: metadata)
+        let url = try await ref.downloadURL()
+        return url.absoluteString
+    }
 }

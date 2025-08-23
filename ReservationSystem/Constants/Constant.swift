@@ -20,6 +20,7 @@ struct Constant {
             static let pinCode = "pinCode"
             static let userName = "name"
             static let email = "email"
+            static let photoURL = "photoURL"
             static let employeeCategory = "employeeCategory"
         }
         
@@ -47,6 +48,17 @@ struct Constant {
             static let number = "number"
         }
     }
+    
+    struct ProfilePicturePicker {
+        static let name = "ProfilePicturePicker"
+        static let title = "Profile picture"
+        static let shape = "person.crop.circle.fill"
+        static let changePicture = "change profile picture"
+        static let addPicture = "add picture"
+        static let systemImage = "camera.fill"
+        static let systemImage2 = "trash"
+        static let removeImage = "remove picture"
+    }
         
     struct AccessController {
         static let name = "AccessController"
@@ -65,7 +77,6 @@ struct Constant {
         static let emailMissing = "email is missing"
         static let pinMissing = "pin is missing"
         static let roleMissing = "role is missing"
-        
         
         struct Controller {
             static let name = "NewUserController"
@@ -127,7 +138,6 @@ struct Constant {
         static let icon = "cart"
         static let generatedList = "Generated List:"
         static let generatedList2 = "Generated List"
-
     }
     
     struct PaymentController {

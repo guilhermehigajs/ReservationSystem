@@ -23,6 +23,7 @@ struct NewUserScreen: View {
     @State private var categoryInput: String = ""
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var profileImage: UIImage? = nil
     
     init(databaseManager: DatabaseManaging) {
         self.databaseManager = databaseManager
@@ -38,6 +39,14 @@ struct NewUserScreen: View {
                         .font(.title2)
                         .bold()
                         .padding(.top, 12)
+                    
+                    ProfilePicturePicker(
+                        image: $profileImage,
+                        title: Constant.ProfilePicturePicker.title,
+                        size: 120,
+                        allowsRemoval: true
+                    )
+                    .padding(.top, 4)
                     
                     VStack(spacing: 6) {
                         ValidatedTextField(
@@ -72,23 +81,7 @@ struct NewUserScreen: View {
                             errorMessage: Constant.NewUser.roleMissing
                         )
                     }
-                    Button {
-                        guard let category = parseCategory(from: categoryInput) else {
-                            alertMessage = Constant.Message.Error.wrongCategoryChoosen
-                            showAlert = true
-                            return
-                        }
-                        let newUser = User(
-                            id: UUID().uuidString,
-                            name: name,
-                            email: email,
-                            pinCode: pinCode,
-                            employeeCategory: category
-                        )
-                        alertMessage = Constant.Message.Success.userRegistered
-                        showAlert = true
-                        newUserController.registerNewUser(newUser)
-                    } label: {
+                    Button(action: handleAddUserTapped) {
                         ButtomShape(title: Constant.NewUser.addUserButtom)
                     }
                     .disabled(!isFormValid)
@@ -135,6 +128,50 @@ struct NewUserScreen: View {
         !email.isEmpty &&
         !pinCode.isEmpty &&
         !categoryInput.isEmpty
+    }
+    
+    private func generateUser(category: EmployeeCategory) async throws -> User {
+        let idGenerated = UUID().uuidString
+        var photoURLString: String? = nil
+        
+//        if let image = profileImage {
+//            do {
+//                photoURLString = try await newUserController.uploadProfileImage(image, userId: idGenerated)
+//            } catch {
+//                let ns = error as NSError
+//                print("UPLOAD ERROR domain=\(ns.domain) code=\(ns.code) userInfo=\(ns.userInfo)")
+//                throw error // mantém a propagação para cair no catch de fora
+//            }
+//        }
+        
+        return User(
+            id: idGenerated,
+            name: name,
+            email: email,
+            pinCode: pinCode,
+//            photoURL: photoURLString,
+            employeeCategory: category
+        )
+    }
+    
+    private func handleAddUserTapped() {
+        Task {
+            guard let category = parseCategory(from: categoryInput) else {
+                alertMessage = Constant.Message.Error.wrongCategoryChoosen
+                showAlert = true
+                return
+            }
+            do {
+                showAlert = true
+                let newUser = try await generateUser(category: category)
+                alertMessage = Constant.Message.Success.userRegistered
+                newUserController.registerNewUser(newUser)
+            } catch {
+                print("Falha ao criar usuário: \(error.localizedDescription)")
+                alertMessage = "Falha ao enviar a foto. Tente novamente."
+                showAlert = true
+            }
+        }
     }
 }
 
