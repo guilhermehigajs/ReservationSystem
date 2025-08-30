@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class ShoppingListController {
+    private static let TAG = ControllerConstants.ShoppingList.name
+}

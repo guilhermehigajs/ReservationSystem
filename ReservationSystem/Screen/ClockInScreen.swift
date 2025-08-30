@@ -33,7 +33,7 @@ struct ClockInScreen: View {
                             .font(.title2)
                             .foregroundColor(.black.opacity(0.8))
 
-                        Text(Constant.ClockInController.shiftControl)
+                        Text(ViewConstants.ClockIn.shiftControl)
                             .font(.title)
                             .bold()
                             .foregroundColor(.black)
@@ -47,14 +47,14 @@ struct ClockInScreen: View {
                                 Button {
                                     simulateAction(.returnFromBreak)
                                 } label: {
-                                    Label(Constant.ClockInController.returnBreak, systemImage: Constant.ClockInController.returnBreakImage)
+                                    Label(ViewConstants.ClockIn.returnBreak, systemImage: Constant.Image.ClockIn.returnBreakImage)
                                 }
                                 .buttonStyle(ShiftButtonStyle())
                             } else {
                                 Button {
                                     simulateAction(.breakTime)
                                 } label: {
-                                    Label(Constant.ClockInController.breakShift, systemImage: Constant.ClockInController.breakShiftImage)
+                                    Label(ViewConstants.ClockIn.breakShift, systemImage: Constant.Image.ClockIn.breakShiftImage)
                                 }
                                 .buttonStyle(ShiftButtonStyle())
                             }
@@ -62,7 +62,7 @@ struct ClockInScreen: View {
                             Button {
                                 simulateAction(.endShift)
                             } label: {
-                                Label(Constant.ClockInController.endShift, systemImage: Constant.ClockInController.endShiftImage)
+                                Label(ViewConstants.ClockIn.endShift, systemImage: Constant.Image.ClockIn.endShiftImage)
                             }
                             .buttonStyle(ShiftButtonStyle())
                         }
@@ -70,7 +70,7 @@ struct ClockInScreen: View {
                         Button {
                             simulateAction(.clockIn)
                         } label: {
-                            Label(Constant.ClockInController.clockIn, systemImage: Constant.ClockInController.clockInImage)
+                            Label(Constant.Image.ClockIn.clockIn, systemImage: Constant.Image.ClockIn.clockInImage)
                         }
                         .buttonStyle(ShiftButtonStyle())
                     }
@@ -98,17 +98,17 @@ struct ClockInScreen: View {
             switch action {
             case .clockIn:
                 hasClockedIn = true
-                confirmationMessage = Constant.ClockInController.clockInCompleted
+                confirmationMessage = Constant.Image.ClockIn.clockInCompleted
             case .breakTime:
                 isOnBreak = true
-                confirmationMessage = Constant.ClockInController.breakStarted
+                confirmationMessage = Constant.Image.ClockIn.breakStarted
             case .returnFromBreak:
                 isOnBreak = false
-                confirmationMessage = Constant.ClockInController.returnBreakCompleted
+                confirmationMessage = Constant.Image.ClockIn.returnBreakCompleted
             case .endShift:
                 hasClockedIn = false
                 isOnBreak = false
-                confirmationMessage = Constant.ClockInController.shiftEnded
+                confirmationMessage = Constant.Image.ClockIn.shiftEnded
             }
             showConfirmationText = true
         }

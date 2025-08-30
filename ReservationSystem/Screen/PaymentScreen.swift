@@ -52,7 +52,7 @@ struct PaymentScreen: View {
 
             HStack {
                 Spacer()
-                Text(Constant.PaymentController.title)
+                Text(ViewConstants.Payment.title)
                     .font(.title2)
                     .bold()
                 Spacer()
@@ -62,33 +62,33 @@ struct PaymentScreen: View {
                 .font(.headline)
                 .padding(.horizontal)
 
-            Text(Constant.PaymentController.weeklyPerformace)
+            Text(ViewConstants.Payment.weeklyPerformace)
                 .font(.subheadline)
                 .padding(.horizontal)
 
             Chart {
                 ForEach(data) { entry in
                     BarMark(
-                        x: .value(Constant.PaymentController.day, entry.day),
-                        y: .value(Constant.PaymentController.expected, entry.expectedEarnings)
+                        x: .value(ViewConstants.Payment.day, entry.day),
+                        y: .value(ViewConstants.Payment.expected, entry.expectedEarnings)
                     )
                     .foregroundStyle(Color.green.opacity(0.6))
-                    .position(by: .value(Constant.PaymentController.type, Constant.PaymentController.expected))
+                    .position(by: .value(ViewConstants.Payment.type, ViewConstants.Payment.expected))
 
                     BarMark(
-                        x: .value(Constant.PaymentController.day, entry.day),
-                        y: .value(Constant.PaymentController.actual, entry.actualEarnings)
+                        x: .value(ViewConstants.Payment.day, entry.day),
+                        y: .value(ViewConstants.Payment.actual, entry.actualEarnings)
                     )
                     .foregroundStyle(Color.blue.opacity(0.6))
-                    .position(by: .value(Constant.PaymentController.type, Constant.PaymentController.actual))
+                    .position(by: .value(ViewConstants.Payment.type, ViewConstants.Payment.actual))
                 }
             }
             .frame(height: 220)
             .padding(.horizontal)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text(Constant.PaymentController.totalExpected + "\(String(format: "%.2f", totalExpected)) • \(String(format: "%.1f", totalExpectedHours))h")
-                Text(Constant.PaymentController.actualTotal + "\(String(format: "%.2f", totalActual)) • \(String(format: "%.1f", totalActualHours))h")
+                Text(ViewConstants.Payment.totalExpected + "\(String(format: "%.2f", totalExpected)) • \(String(format: "%.1f", totalExpectedHours))h")
+                Text(ViewConstants.Payment.actualTotal + "\(String(format: "%.2f", totalActual)) • \(String(format: "%.1f", totalActualHours))h")
             }
             .font(.subheadline)
             .padding(.horizontal)

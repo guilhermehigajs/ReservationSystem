@@ -27,7 +27,7 @@ struct ShoppingListScreen: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(Constant.ShoppingListController.nameScreen)
+            Text(ViewConstants.ShoppingList.nameScreen)
                 .font(.title2)
                 .bold()
                 .padding(.horizontal)
@@ -57,9 +57,9 @@ struct ShoppingListScreen: View {
 
                 Button(action: {
                     let selectedItems = shoppingItems.filter { $0.quantity > 0 }
-                    print(Constant.ShoppingListController.generatedList, selectedItems.map { "\($0.name): \($0.quantity)" })
+                    print(ViewConstants.ShoppingList.generatedList, selectedItems.map { "\($0.name): \($0.quantity)" })
                 }) {
-                    Text(Constant.ShoppingListController.generatedList2)
+                    Text(ViewConstants.ShoppingList.generatedList)
                         .bold()
                         .frame(maxWidth: .infinity)
                         .padding()

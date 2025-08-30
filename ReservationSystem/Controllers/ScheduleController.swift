@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class ScheduleController {
+    private static let TAG = ControllerConstants.Schedule.name
+}

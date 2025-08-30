@@ -8,7 +8,7 @@
 import Foundation
 
 struct MainController {
-    private static let TAG = Constant.MainController.name
+    private static let TAG = ControllerConstants.Main.name
     
     let user: User
     let databaseManager: DatabaseManaging
@@ -50,15 +50,15 @@ struct MainController {
     func iconName(for option: MenuOption) -> String {
         switch option {
         case .analysis:
-            return Constant.AnalysisController.icon
+            return Constant.Image.Analysis.icon
         case .clockIn:
-            return Constant.ClockInController.clockInImage
+            return Constant.Image.ClockIn.clockInImage
         case .schedule:
-            return Constant.ScheduleController.icon
+            return Constant.Image.Schedule.icon
         case .floorMap:
-            return Constant.FloorMapController.icon
+            return Constant.Image.FloorMap.icon
         case .payment:
-            return Constant.PaymentController.icon
+            return Constant.Image.Payment.icon
         }
     }
 

@@ -20,7 +20,7 @@ struct ShiftInformationView: View {
                         onMenuTap()
                     }
                 }) {
-                    Image(systemName: Constant.MainController.menuLeft)
+                    Image(systemName: Constant.Image.Main.menuLeft)
                         .resizable()
                         .frame(width: 24, height: 24)
                         .padding()
@@ -36,7 +36,7 @@ struct ShiftInformationView: View {
             }
             
             VStack(alignment: .leading, spacing: 10) {
-                Text(Constant.MainController.todayShift)
+                Text(ViewConstants.Main.todayShift)
                     .font(.headline)
                 
                 HStack {
@@ -58,7 +58,7 @@ struct ShiftInformationView: View {
                     Button(action: {
                         onClockInTap()
                     }) {
-                        Text(Constant.ClockInController.clockIn)
+                        Text(Constant.Image.ClockIn.clockIn)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.green.opacity(0.7))
@@ -69,7 +69,7 @@ struct ShiftInformationView: View {
                     Button(action: {
                         onOfferShiftTap()
                     }) {
-                        Text(Constant.MainController.offerShift)
+                        Text(ViewConstants.Main.offerShift)
                             .frame(maxWidth: .infinity)
                             .padding()
                             .background(Color.orange.opacity(0.7))

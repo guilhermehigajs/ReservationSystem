@@ -9,6 +9,8 @@ import Foundation
 import Combine
 
 class AnalysisController: ObservableObject {
+    private static let TAG = ControllerConstants.Analysis.name
+    
     @Published var user: User
     
     init(user: User) {

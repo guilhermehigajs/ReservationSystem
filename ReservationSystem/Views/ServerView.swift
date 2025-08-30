@@ -16,7 +16,7 @@ struct ServerView: View {
             
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(Constant.ServerView.title)
+                    Text(ViewConstants.ServerView.title)
                         .font(.title2)
                         .bold()
                         .padding(.top, 20)
@@ -46,11 +46,11 @@ struct ServerView: View {
                                         .foregroundColor(.white.opacity(0.85))
                                 }
 
-                                Text("\(Constant.ServerView.total): $480.00")
+                                Text("\(ViewConstants.ServerView.total): $480.00")
                                     .font(.subheadline)
                                     .foregroundColor(.white)
 
-                                Text("\(Constant.ServerView.tips): $64.00")
+                                Text("\(ViewConstants.ServerView.tips): $64.00")
                                     .font(.subheadline)
                                     .foregroundColor(.white)
                             }
@@ -58,7 +58,7 @@ struct ServerView: View {
                             Spacer()
                         }
 
-                        Text("\(Constant.ServerView.topSpendingTable): 5")
+                        Text("\(ViewConstants.ServerView.topSpendingTable): 5")
                             .font(.subheadline)
                             .foregroundColor(.white)
                     }
@@ -67,7 +67,7 @@ struct ServerView: View {
                     .cornerRadius(16)
                     .padding(.horizontal)
 
-                    Text(Constant.ServerView.currentTables)
+                    Text(ViewConstants.ServerView.currentTables)
                         .font(.headline)
                         .padding(.horizontal)
 

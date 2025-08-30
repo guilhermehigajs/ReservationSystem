@@ -97,7 +97,7 @@ struct FloorMapScreen: View {
             .onAppear {
                 floorMapController.loadFloorInf()
             }
-            .navigationTitle(Constant.FloorMapController.title)
+            .navigationTitle(ViewConstants.FloorMap.title)
             .navigationBarTitleDisplayMode(.inline)
         }
     }

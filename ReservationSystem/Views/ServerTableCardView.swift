@@ -45,7 +45,7 @@ struct ServerTableRow: View {
                             .font(.caption)
                             .foregroundColor(.gray)
                     }
-                    Text("\(Constant.ServerView.total): \(total.formatted(.currency(code: "USD")))")
+                    Text("\(ViewConstants.ServerView.total): \(total.formatted(.currency(code: "USD")))")
                         .font(.subheadline)
                     
                     Text(seatedTime)

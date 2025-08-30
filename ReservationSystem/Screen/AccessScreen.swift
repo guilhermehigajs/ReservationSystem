@@ -65,7 +65,7 @@ struct AccessScreen: View {
                     Button(action: {
                         isRegistering = true
                     }) {
-                        Text(Constant.AccessController.addNewUserButtomMessage)
+                        Text(ControllerConstants.Access.addNewUserButtomMessage)
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: .infinity)

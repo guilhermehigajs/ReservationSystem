@@ -24,10 +24,10 @@ struct ProfilePicturePicker: View {
     
     public init(
         image: Binding<UIImage?>,
-        title: String = Constant.ProfilePicturePicker.title,
+        title: String = ViewConstants.ProfilePicturePicker.title,
         size: CGFloat = 120,
         allowsRemoval: Bool = true,
-        placeholderSystemImage: String = Constant.ProfilePicturePicker.shape,
+    placeholderSystemImage: String = Constant.Image.ProfilePicturePicker.shape,
         contentType: UTType? = .image
     ) {
         self._image = image
@@ -74,8 +74,8 @@ struct ProfilePicturePicker: View {
                     matching: .images,
                     photoLibrary: .shared()
                 ) {
-                    Label(image == nil ? Constant.ProfilePicturePicker.addPicture : Constant.ProfilePicturePicker.changePicture,
-                          systemImage: Constant.ProfilePicturePicker.systemImage)
+                    Label(image == nil ? ViewConstants.ProfilePicturePicker.addPicture : ViewConstants.ProfilePicturePicker.changePicture,
+                          systemImage: Constant.Image.ProfilePicturePicker.systemImage)
                         .font(.callout.weight(.semibold))
                         .padding(.horizontal, 14)
                         .padding(.vertical, 8)
@@ -87,7 +87,7 @@ struct ProfilePicturePicker: View {
                     Button {
                         image = nil
                     } label: {
-                        Label(Constant.ProfilePicturePicker.removeImage, systemImage: Constant.ProfilePicturePicker.systemImage2)
+                        Label(ViewConstants.ProfilePicturePicker.removeImage, systemImage: Constant.Image.ProfilePicturePicker.systemImage2)
                             .font(.callout.weight(.semibold))
                             .padding(.horizontal, 14)
                             .padding(.vertical, 8)

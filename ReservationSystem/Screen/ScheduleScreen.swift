@@ -56,7 +56,7 @@ struct ScheduleScreen: View {
                     VStack(spacing: 12) {
                         ForEach(currentWeek, id: \.self) { date in
                             let shift = mockShifts[date.onlyDate()]
-                            let role = shift?.role ?? Constant.ScheduleController.off
+                            let role = shift?.role ?? ViewConstants.Schedule.off
                             let hasShift = shift != nil
 
                             DisclosureGroup {
@@ -65,17 +65,17 @@ struct ScheduleScreen: View {
                                         HStack(alignment: .top) {
                                             VStack(alignment: .leading, spacing: 6) {
                                                 HStack {
-                                                    Image(systemName: Constant.ClockInController.clockIn).foregroundColor(.blue)
+                                                    Image(systemName: Constant.Image.ClockIn.clockIn).foregroundColor(.blue)
                                                     Text("\(shift.startTime) - \(shift.endTime)")
                                                 }
 
                                                 HStack {
-                                                    Image(systemName: Constant.PaymentController.icon).foregroundColor(.green)
+                                                    Image(systemName: Constant.Image.Payment.icon).foregroundColor(.green)
                                                     Text("$\(shift.estimatedPay, specifier: "%.2f")")
                                                 }
 
                                                 HStack {
-                                                    Image(systemName: Constant.ScheduleController.workedHours).foregroundColor(.orange)
+                                                    Image(systemName: Constant.Image.Schedule.workedHours).foregroundColor(.orange)
                                                     Text("\(shift.hoursWorked, specifier: "%.1f") hours")
                                                 }
                                             }
@@ -91,11 +91,11 @@ struct ScheduleScreen: View {
                                         .font(.headline)
 
                                     if hasShift {
-                                        Text(Constant.ScheduleController.scheduleShift + " \(role)")
+                                        Text(ViewConstants.Schedule.scheduleShift + " \(role)")
                                             .font(.subheadline)
                                             .foregroundColor(.gray)
                                     } else {
-                                        Text(Constant.ScheduleController.dayOff)
+                                        Text(ViewConstants.Schedule.dayOff)
                                             .foregroundColor(.secondary)
                                             .font(.subheadline)
                                     }

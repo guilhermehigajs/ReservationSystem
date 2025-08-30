@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class ClockInController {
+    private static let TAG = ControllerConstants.ClockIn.name
+}

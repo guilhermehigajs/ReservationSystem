@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class PaymentController {
+    private static let TAG = ControllerConstants.Payment.name
+}

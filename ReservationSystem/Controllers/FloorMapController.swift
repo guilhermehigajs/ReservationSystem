@@ -8,7 +8,7 @@
 import Foundation
 
 class FloorMapController: ObservableObject {
-    private static let TAG = Constant.FloorMapController.name
+    private static let TAG = ControllerConstants.FloorMap.name
     
     @Published var floors: [Floor] = []
     @Published var selectedLevel: Int?
